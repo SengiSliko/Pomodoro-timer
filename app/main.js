@@ -125,6 +125,12 @@ function playChime() {
   if (!settings.soundOn) return;
   try {
     audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+    // Browsers auto-suspend an idle AudioContext (e.g. between long focus/break
+    // sessions); resume it defensively so the chime is still audible on later
+    // transitions, not just the first one. Safe/no-op if already running.
+    if (audioCtx.state !== 'running') {
+      audioCtx.resume().catch(() => {});
+    }
     const osc = audioCtx.createOscillator();
     const gain = audioCtx.createGain();
     osc.type = 'sine';

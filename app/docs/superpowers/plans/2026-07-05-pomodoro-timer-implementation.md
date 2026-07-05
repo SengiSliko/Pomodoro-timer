@@ -31,13 +31,13 @@
 - Create: `app/package.json`
 - Create: `app/.gitignore`
 
-- [ ] **Step 1: Initialize git**
+- [x] **Step 1: Initialize git**
 
 ```bash
 cd /Users/rtsono/Desktop/webprojects && git init
 ```
 
-- [ ] **Step 2: Create package.json**
+- [x] **Step 2: Create package.json**
 
 ```json
 {
@@ -52,7 +52,7 @@ cd /Users/rtsono/Desktop/webprojects && git init
 
 Save as `app/package.json`.
 
-- [ ] **Step 3: Create .gitignore**
+- [x] **Step 3: Create .gitignore**
 
 ```
 .DS_Store
@@ -61,7 +61,7 @@ node_modules/
 
 Save as `app/.gitignore`.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```bash
 cd /Users/rtsono/Desktop/webprojects && git add app/package.json app/.gitignore docs 2>/dev/null; git add app/package.json app/.gitignore app/docs
@@ -76,7 +76,7 @@ git commit -m "chore: scaffold pomodoro-timer project"
 - Create: `app/timer.js`
 - Test: `app/tests/timer.test.mjs`
 
-- [ ] **Step 1: Write the failing tests**
+- [x] **Step 1: Write the failing tests**
 
 ```javascript
 // app/tests/timer.test.mjs
@@ -182,7 +182,7 @@ test('nextSession cycles work -> shortBreak -> work across a full 4-session set,
 });
 ```
 
-- [ ] **Step 2: Run tests to verify they fail**
+- [x] **Step 2: Run tests to verify they fail**
 
 ```bash
 cd /Users/rtsono/Desktop/webprojects/app && node --test tests/timer.test.mjs
@@ -190,7 +190,7 @@ cd /Users/rtsono/Desktop/webprojects/app && node --test tests/timer.test.mjs
 
 Expected: FAIL — `Cannot find module '../timer.js'` (file doesn't exist yet).
 
-- [ ] **Step 3: Write the implementation**
+- [x] **Step 3: Write the implementation**
 
 ```javascript
 // app/timer.js
@@ -262,7 +262,7 @@ export function nextSession(state, settings) {
 }
 ```
 
-- [ ] **Step 4: Run tests to verify they pass**
+- [x] **Step 4: Run tests to verify they pass**
 
 ```bash
 cd /Users/rtsono/Desktop/webprojects/app && node --test tests/timer.test.mjs
@@ -270,7 +270,7 @@ cd /Users/rtsono/Desktop/webprojects/app && node --test tests/timer.test.mjs
 
 Expected: PASS — all 7 tests green.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 cd /Users/rtsono/Desktop/webprojects && git add app/timer.js app/tests/timer.test.mjs
@@ -285,7 +285,7 @@ git commit -m "feat: add pomodoro session state machine"
 - Create: `app/settings.js`
 - Test: `app/tests/settings.test.mjs`
 
-- [ ] **Step 1: Write the failing tests**
+- [x] **Step 1: Write the failing tests**
 
 ```javascript
 // app/tests/settings.test.mjs
@@ -335,7 +335,7 @@ test('normalizeSettings falls back to default for non-boolean soundOn', () => {
 });
 ```
 
-- [ ] **Step 2: Run tests to verify they fail**
+- [x] **Step 2: Run tests to verify they fail**
 
 ```bash
 cd /Users/rtsono/Desktop/webprojects/app && node --test tests/settings.test.mjs
@@ -343,7 +343,7 @@ cd /Users/rtsono/Desktop/webprojects/app && node --test tests/settings.test.mjs
 
 Expected: FAIL — `Cannot find module '../settings.js'`.
 
-- [ ] **Step 3: Write the implementation**
+- [x] **Step 3: Write the implementation**
 
 ```javascript
 // app/settings.js
@@ -373,7 +373,7 @@ export function normalizeSettings(raw) {
 }
 ```
 
-- [ ] **Step 4: Run tests to verify they pass**
+- [x] **Step 4: Run tests to verify they pass**
 
 ```bash
 cd /Users/rtsono/Desktop/webprojects/app && node --test tests/settings.test.mjs
@@ -381,7 +381,7 @@ cd /Users/rtsono/Desktop/webprojects/app && node --test tests/settings.test.mjs
 
 Expected: PASS — all 4 tests green.
 
-- [ ] **Step 5: Run the full test suite**
+- [x] **Step 5: Run the full test suite**
 
 ```bash
 cd /Users/rtsono/Desktop/webprojects/app && node --test tests/
@@ -389,7 +389,7 @@ cd /Users/rtsono/Desktop/webprojects/app && node --test tests/
 
 Expected: PASS — 11 tests total, 0 failures.
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 cd /Users/rtsono/Desktop/webprojects && git add app/settings.js app/tests/settings.test.mjs
@@ -403,7 +403,7 @@ git commit -m "feat: add settings validation module"
 **Files:**
 - Create: `app/index.html`
 
-- [ ] **Step 1: Write index.html**
+- [x] **Step 1: Write index.html**
 
 ```html
 <!DOCTYPE html>
@@ -472,7 +472,7 @@ git commit -m "feat: add settings validation module"
 </html>
 ```
 
-- [ ] **Step 2: Commit**
+- [x] **Step 2: Commit**
 
 ```bash
 cd /Users/rtsono/Desktop/webprojects && git add app/index.html
@@ -486,7 +486,7 @@ git commit -m "feat: add pomodoro page markup"
 **Files:**
 - Create: `app/styles.css`
 
-- [ ] **Step 1: Write styles.css**
+- [x] **Step 1: Write styles.css**
 
 ```css
 * {
@@ -685,7 +685,7 @@ body {
 }
 ```
 
-- [ ] **Step 2: Commit**
+- [x] **Step 2: Commit**
 
 ```bash
 cd /Users/rtsono/Desktop/webprojects && git add app/styles.css
@@ -699,7 +699,7 @@ git commit -m "feat: add responsive layout and hourglass animation styles"
 **Files:**
 - Create: `app/main.js`
 
-- [ ] **Step 1: Write the core state wiring, rendering, and tab title logic**
+- [x] **Step 1: Write the core state wiring, rendering, and tab title logic**
 
 ```javascript
 // app/main.js
@@ -841,7 +841,7 @@ function playChime() {
 render();
 ```
 
-- [ ] **Step 2: Manual check — countdown runs**
+- [x] **Step 2: Manual check — countdown runs**
 
 Start a static server and open the page:
 
@@ -856,7 +856,7 @@ Open `http://localhost:8000/` in a browser. Click the play button (▶). Confirm
 
 Stop the server with Ctrl+C when done.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 cd /Users/rtsono/Desktop/webprojects && git add app/main.js
@@ -870,7 +870,7 @@ git commit -m "feat: wire countdown engine, rendering, chime, and notifications"
 **Files:**
 - Modify: `app/main.js`
 
-- [ ] **Step 1: Add settings modal open/save/cancel logic**
+- [x] **Step 1: Add settings modal open/save/cancel logic**
 
 In `app/main.js`, move the final `render();` call down so it becomes the last line of the file, and insert this block immediately above it:
 
@@ -918,7 +918,7 @@ settingsForm.addEventListener('submit', (event) => {
 });
 ```
 
-- [ ] **Step 2: Manual check — settings persist**
+- [x] **Step 2: Manual check — settings persist**
 
 ```bash
 cd /Users/rtsono/Desktop/webprojects/app && python3 -m http.server 8000
@@ -929,7 +929,7 @@ Open `http://localhost:8000/`. Click the gear icon. Confirm:
 - Change "Work (minutes)" to `1`, click Save. Confirm the clock immediately shows `01:00`.
 - Reload the page. Confirm the clock still shows `01:00` (setting persisted via `localStorage`).
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 cd /Users/rtsono/Desktop/webprojects && git add app/main.js
@@ -943,7 +943,7 @@ git commit -m "feat: wire settings modal with localStorage persistence"
 **Files:**
 - Create: `app/README.md`
 
-- [ ] **Step 1: Write README.md**
+- [x] **Step 1: Write README.md**
 
 ```markdown
 # Pomodoro Timer
@@ -993,7 +993,7 @@ npx vercel --prod
 ```
 ```
 
-- [ ] **Step 2: Commit**
+- [x] **Step 2: Commit**
 
 ```bash
 cd /Users/rtsono/Desktop/webprojects && git add app/README.md
@@ -1007,13 +1007,12 @@ git commit -m "docs: add README with run, test, and deploy instructions"
 **Files:**
 - Create: `app/vercel.json`
 
-- [ ] **Step 1: Write vercel.json**
+- [x] **Step 1: Write vercel.json**
 
 ```json
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
-  "buildCommand": false,
   "outputDirectory": ".",
   "cleanUrls": true
 }
@@ -1021,7 +1020,7 @@ git commit -m "docs: add README with run, test, and deploy instructions"
 
 This tells Vercel there is no framework and no build step — it serves the contents of `app/` (set as the project's Root Directory) directly as static files, with clean URLs (so `/` serves `index.html`).
 
-- [ ] **Step 2: Manual check**
+- [x] **Step 2: Manual check**
 
 ```bash
 cd /Users/rtsono/Desktop/webprojects/app && python3 -c "import json; json.load(open('vercel.json'))" && echo "valid JSON"
@@ -1029,7 +1028,7 @@ cd /Users/rtsono/Desktop/webprojects/app && python3 -c "import json; json.load(o
 
 Expected: `valid JSON`.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```bash
 cd /Users/rtsono/Desktop/webprojects && git add app/vercel.json
