@@ -1,3 +1,9 @@
+@font-face {
+  font-family: 'Alarm Clock';
+  src: url('./fonts/alarm-clock.ttf') format('truetype');
+  font-display: swap;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -38,9 +44,10 @@ body {
 }
 
 .clock {
-  font-weight: 200;
+  font-family: 'Alarm Clock', 'SF Mono', 'Courier New', monospace;
+  font-weight: 400;
   font-size: clamp(48px, 12vw, 96px);
-  letter-spacing: 2px;
+  letter-spacing: 4px;
   line-height: 1;
 }
 
@@ -100,6 +107,8 @@ body {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -113,15 +122,16 @@ body {
 
 .alert-panel {
   background: #fff;
-  border-radius: 20px;
-  padding: 40px 32px;
-  width: min(360px, 100%);
+  border-radius: 28px;
+  padding: 56px 40px;
+  width: min(380px, 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
+  gap: 12px;
   text-align: center;
-  animation: alert-pop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
+  animation: alert-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 @keyframes alert-pop {
@@ -129,10 +139,43 @@ body {
   100% { transform: scale(1); opacity: 1; }
 }
 
-.alert-heading {
+.alert-eyebrow {
   margin: 0;
-  font-size: clamp(22px, 5vw, 28px);
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #999;
+}
+
+.alert-heading {
+  margin: 0 0 20px;
+  font-size: clamp(26px, 6vw, 32px);
+  font-weight: 300;
+  letter-spacing: 0.3px;
+  color: #1a1a1a;
+}
+
+.alert-ok {
+  background: #1a1a1a;
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 14px 44px;
+  font-size: 13px;
   font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.alert-ok:hover {
+  opacity: 0.85;
+}
+
+.alert-ok:active {
+  transform: scale(0.96);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -160,24 +203,27 @@ body {
 
 .field {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  gap: 12px;
+  text-align: center;
+  gap: 8px;
   font-size: 14px;
   color: #444;
 }
 
 .field input[type="number"] {
-  width: 70px;
+  width: 90px;
   padding: 6px 8px;
   border: 1px solid #ccc;
   border-radius: 6px;
-  font-family: inherit;
-  font-size: 14px;
+  font-family: 'Alarm Clock', 'SF Mono', 'Courier New', monospace;
+  font-size: 18px;
+  text-align: center;
 }
 
 .field.checkbox {
-  justify-content: flex-start;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .settings-actions {
