@@ -141,4 +141,46 @@ function playChime() {
   }
 }
 
+const settingsBtn = document.getElementById('settingsBtn');
+const settingsOverlay = document.getElementById('settingsOverlay');
+const settingsForm = document.getElementById('settingsForm');
+const settingsCancel = document.getElementById('settingsCancel');
+
+const workMinutesInput = document.getElementById('workMinutes');
+const shortBreakMinutesInput = document.getElementById('shortBreakMinutes');
+const longBreakMinutesInput = document.getElementById('longBreakMinutes');
+const sessionsBeforeLongBreakInput = document.getElementById('sessionsBeforeLongBreak');
+const soundOnInput = document.getElementById('soundOn');
+
+function openSettings() {
+  workMinutesInput.value = settings.workMinutes;
+  shortBreakMinutesInput.value = settings.shortBreakMinutes;
+  longBreakMinutesInput.value = settings.longBreakMinutes;
+  sessionsBeforeLongBreakInput.value = settings.sessionsBeforeLongBreak;
+  soundOnInput.checked = settings.soundOn;
+  settingsOverlay.hidden = false;
+}
+
+function closeSettings() {
+  settingsOverlay.hidden = true;
+}
+
+settingsBtn.addEventListener('click', openSettings);
+settingsCancel.addEventListener('click', closeSettings);
+
+settingsForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  settings = normalizeSettings({
+    workMinutes: workMinutesInput.value,
+    shortBreakMinutes: shortBreakMinutesInput.value,
+    longBreakMinutes: longBreakMinutesInput.value,
+    sessionsBeforeLongBreak: sessionsBeforeLongBreakInput.value,
+    soundOn: soundOnInput.checked,
+  });
+  saveSettings(settings);
+  state = resetSession(state, settings);
+  closeSettings();
+  render();
+});
+
 render();
