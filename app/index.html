@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Pomodoro</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="app">
+    <div class="hourglass" id="hourglass" style="--progress: 1">
+      <svg viewBox="0 0 60 90" aria-hidden="true">
+        <path class="glass" d="M8,4 L52,4 L52,10 L30,45 L52,80 L52,86 L8,86 L8,80 L30,45 L8,10 Z" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path class="sand-top" d="M14,10 L46,10 L30,42 Z" fill="currentColor"/>
+        <path class="sand-bottom" d="M30,48 L46,80 L14,80 Z" fill="currentColor"/>
+        <rect class="sand-stream" x="29" y="42" width="2" height="8" fill="currentColor"/>
+      </svg>
+    </div>
+
+    <div class="clock" id="clock">25:00</div>
+    <div class="caption" id="caption">FOCUS · 1 OF 4</div>
+
+    <div class="controls">
+      <button type="button" class="btn" id="resetBtn" aria-label="Reset session">↺</button>
+      <button type="button" class="btn primary" id="playPauseBtn" aria-label="Play">▶</button>
+      <button type="button" class="btn" id="settingsBtn" aria-label="Open settings">⚙</button>
+    </div>
+  </main>
+
+  <div class="settings-overlay" id="settingsOverlay" hidden>
+    <form class="settings-panel" id="settingsForm" role="dialog" aria-modal="true" aria-labelledby="settingsHeading">
+      <h2 id="settingsHeading">Settings</h2>
+
+      <label class="field">
+        Work (minutes)
+        <input type="number" id="workMinutes" name="workMinutes" min="1" inputmode="numeric" required>
+      </label>
+      <label class="field">
+        Short break (minutes)
+        <input type="number" id="shortBreakMinutes" name="shortBreakMinutes" min="1" inputmode="numeric" required>
+      </label>
+      <label class="field">
+        Long break (minutes)
+        <input type="number" id="longBreakMinutes" name="longBreakMinutes" min="1" inputmode="numeric" required>
+      </label>
+      <label class="field">
+        Sessions before long break
+        <input type="number" id="sessionsBeforeLongBreak" name="sessionsBeforeLongBreak" min="1" inputmode="numeric" required>
+      </label>
+      <label class="field checkbox">
+        <input type="checkbox" id="soundOn" name="soundOn">
+        Sound on
+      </label>
+
+      <div class="settings-actions">
+        <button type="button" class="btn-text" id="settingsCancel">Cancel</button>
+        <button type="submit" class="btn-text primary" id="settingsSave">Save</button>
+      </div>
+    </form>
+  </div>
+
+  <script type="module" src="./main.js"></script>
+</body>
+</html>
