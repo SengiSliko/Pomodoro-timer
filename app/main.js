@@ -22,6 +22,12 @@ let state = createInitialState(settings);
 let notificationRequested = false;
 
 const hourglassEl = document.getElementById('hourglass');
+const hourglassSvg = document.getElementById('hourglassSvg');
+const reducedMotion = typeof window.matchMedia === 'function'
+  && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (typeof hourglassSvg.pauseAnimations === 'function') {
+  hourglassSvg.pauseAnimations();
+}
 const clockEl = document.getElementById('clock');
 const captionEl = document.getElementById('caption');
 const playPauseBtn = document.getElementById('playPauseBtn');
@@ -54,9 +60,15 @@ function render() {
   playPauseBtn.textContent = state.running ? '❚❚' : '▶';
   playPauseBtn.setAttribute('aria-label', state.running ? 'Pause' : 'Play');
 
-  const progress = state.totalSeconds > 0 ? state.remainingSeconds / state.totalSeconds : 0;
-  hourglassEl.style.setProperty('--progress', progress.toFixed(4));
   hourglassEl.classList.toggle('running', state.running);
+  if (typeof hourglassSvg.pauseAnimations === 'function') {
+    const shouldPlay = state.running && !reducedMotion;
+    if (shouldPlay) {
+      hourglassSvg.unpauseAnimations();
+    } else {
+      hourglassSvg.pauseAnimations();
+    }
+  }
 
   document.title = `${time} — ${sessionLabel()}`;
 }
@@ -64,6 +76,7 @@ function render() {
 function handleSessionEnd() {
   playChime();
   notify();
+  showSessionEndAlert();
   state = nextSession(state, settings);
   render();
 }
@@ -187,6 +200,25 @@ settingsForm.addEventListener('submit', (event) => {
   state = resetSession(state, settings);
   closeSettings();
   render();
+});
+
+const alertOverlay = document.getElementById('alertOverlay');
+const alertHeading = document.getElementById('alertHeading');
+const alertDismiss = document.getElementById('alertDismiss');
+
+function showSessionEndAlert() {
+  // Keyed by the session type that just ended (called before nextSession reassigns state).
+  const messages = {
+    work: 'Time for a break!',
+    shortBreak: 'Back to focus!',
+    longBreak: 'Back to focus!',
+  };
+  alertHeading.textContent = messages[state.sessionType] || 'Session complete!';
+  alertOverlay.hidden = false;
+}
+
+alertDismiss.addEventListener('click', () => {
+  alertOverlay.hidden = true;
 });
 
 render();
