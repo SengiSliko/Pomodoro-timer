@@ -15,25 +15,33 @@ export function createInitialState(settings) {
     remainingSeconds: totalSeconds,
     totalSeconds,
     running: false,
+    endAt: null,
   };
 }
 
-export function start(state) {
-  return { ...state, running: true };
+export function start(state, now = Date.now()) {
+  if (state.running) return state;
+  return { ...state, running: true, endAt: now + state.remainingSeconds * 1000 };
 }
 
-export function pause(state) {
-  return { ...state, running: false };
+// endAt (not elapsed-tick count) is the source of truth while running, so the
+// countdown reflects real elapsed time even if setInterval ticks are throttled
+// or fully suspended by the browser (e.g. Safari backgrounding the tab).
+export function pause(state, now = Date.now()) {
+  if (!state.running) return state;
+  const remainingSeconds = Math.max(0, Math.round((state.endAt - now) / 1000));
+  return { ...state, running: false, remainingSeconds, endAt: null };
 }
 
 export function resetSession(state, settings) {
   const totalSeconds = durationFor(state.sessionType, settings);
-  return { ...state, remainingSeconds: totalSeconds, totalSeconds, running: false };
+  return { ...state, remainingSeconds: totalSeconds, totalSeconds, running: false, endAt: null };
 }
 
-export function tick(state) {
-  if (!state.running || state.remainingSeconds <= 0) return state;
-  return { ...state, remainingSeconds: state.remainingSeconds - 1 };
+export function tick(state, now = Date.now()) {
+  if (!state.running) return state;
+  const remainingSeconds = Math.max(0, Math.round((state.endAt - now) / 1000));
+  return { ...state, remainingSeconds };
 }
 
 export function nextSession(state, settings) {
@@ -61,5 +69,6 @@ export function nextSession(state, settings) {
     remainingSeconds: totalSeconds,
     totalSeconds,
     running: false,
+    endAt: null,
   };
 }

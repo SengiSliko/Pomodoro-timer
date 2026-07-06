@@ -95,11 +95,21 @@ function loop() {
 
 function ensureInterval() {
   if (intervalId === null) {
-    // Plain 1s wall-clock interval; drift under tab-throttling/backgrounding is an
-    // accepted tradeoff for this app, not an oversight.
+    // remainingSeconds is derived from a fixed endAt timestamp (see timer.js), so
+    // this interval is just a poll — it stays correct even if ticks are throttled
+    // or fully suspended (e.g. Safari backgrounding the tab).
     intervalId = setInterval(loop, 1000);
   }
 }
+
+// Safari (and other browsers) can suspend setInterval entirely while the tab is
+// hidden; force an immediate resync the moment it becomes visible again instead
+// of waiting for possibly-stalled interval ticks to catch up.
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') {
+    loop();
+  }
+});
 
 playPauseBtn.addEventListener('click', () => {
   requestNotificationPermissionOnce();
